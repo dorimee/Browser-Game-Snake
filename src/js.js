@@ -60,7 +60,7 @@ class Block {
   }
 }
 
-// Singletons
+
 
 class Snake {
 
