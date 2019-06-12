@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Snake</title>
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+	<script src ='./src/js.js'></script>
+</head>
+<body>
+
+<canvas id="canvas" width="400" height="400"></canvas>
+
+<script>
+// Getting canvas
+const canvas = document.getElementById("canvas");
+const sizes = {
+	blockSize: 10,
+	width: canvas.width,
+	height: canvas.height,
+	score: 0,
+};
+// Getting context 
+const ctx = canvas.getContext("2d");
+// Setting interface
+drawBorder(ctx, sizes);
+drawScore(ctx, sizes);
+// Setting snake
+const baseConfig = {
+	x: 5,
+	y: 5,
+	tail: 3,
+	snakesColor: 'Pink',
+	appleColor: 'Red',
+}
+// Setting base direction
+const snake = new Snake('right', baseConfig.snakesColor);
+// Setting snakes body
+snake.snakeConstruct(baseConfig.x, baseConfig.y, sizes, baseConfig.tail);
+snake.snakeDraw(sizes, ctx);
+// Setting apple
+const apple = new Apple(baseConfig.x, baseConfig.y, sizes);
+apple.spawn(snake, sizes, ctx);
+// Setting listner for keyboard
+addEventListener("keydown", listner);
+function listner(event) {
+  const directions = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
+  };
+  
+  snake.setDirection(directions[event.keyCode])
+}
+//	Launching
+intervalId(snake, apple, ctx, sizes);
+</script>
+</body>
+</html>
