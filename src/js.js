@@ -137,7 +137,7 @@ class Snake {
   setDirection(newDirection) {
 
     console.log(newDirection);
-    if (newDirection !== undefined) {
+    if (newDirection) {
       if (this.direction === 'up' && newDirection === 'down') {
         return;
       } else if (this.direction === 'right' && newDirection === 'left') {
@@ -154,7 +154,7 @@ class Snake {
 
   // Общая коллизия
 
-  Collision(block, sizes) {
+  collision(block, sizes) {
     return this.wallCollision(block, sizes) || this.snakeCollision(block);
   }
 
